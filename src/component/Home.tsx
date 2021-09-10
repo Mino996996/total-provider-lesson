@@ -14,7 +14,7 @@ const Home = () => {
   const [message, setMessage] = useState<Message>({body: 'this is initial message', title: '', tag: []});
 
   // 【useState】オブジェクトの更新は分割代入で行う（＝全体をコピーして上書きをマージする）
-  const updateTitle = (newTitle: string) => setMessage({...message, title: newTitle});
+  const updateTitle = (newTitle: string): void => setMessage({...message, title: newTitle});
 
 
   // 【JSX基本】返せるブロックは1ブロックのみ。無駄なタグ生成を避けるなら<></>で囲う
@@ -23,7 +23,7 @@ const Home = () => {
       {/* 【if文パターン】falseの時は非表示 */}
       {message.title && <h1>{message.title}</h1>}
 
-      {/* 【イベントの実行】関数オブジェクトで設定する。でないと実行しない */}
+      {/* 【イベントの実行】関数オブジェクトで設定する。でないとonClickのMouseEventHandlerの型にvoid型は適応できない */}
       <button onClick={() => updateTitle('updated!')}>update title</button>
 
       {/* 【JSX基本】値の引用には{}*/}
