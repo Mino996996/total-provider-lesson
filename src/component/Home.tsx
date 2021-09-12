@@ -22,7 +22,7 @@ const Home = () => {
   // const textX = useContext<TextType>(TextContext);
   const [textData, setTextData] = TextSender(); // 隠蔽後
   
-  const [title, setTitle] = useContext(TitleContext)
+  const [title, setTitle] = useContext(TitleContext) // 非隠蔽パターン
   
   // 【JSX基本】返せるブロックは1ブロックのみ。無駄なタグ生成を避けるなら<></>で囲う
   return (
