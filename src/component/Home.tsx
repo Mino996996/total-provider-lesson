@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {TextContext, TextType} from "./TotalProvider";
+import {TextSender} from "./textContextSender";
 
 // 【useState】stateの型情報を作る
 type Message = {
@@ -18,8 +19,9 @@ const Home = () => {
   const updateTitle = (newTitle: string): void => setMessage({...message, title: newTitle});
   
   // 【useContext】データの受け渡し（非バケツリレー）
-  const text = useContext<TextType>(TextContext);
-  text.changeText('great!');
+  // const textX = useContext<TextType>(TextContext);
+  const {text, changeText}: TextType = TextSender(); // 隠蔽後
+  changeText('excellent !');
   
   // 【JSX基本】返せるブロックは1ブロックのみ。無駄なタグ生成を避けるなら<></>で囲う
   return (
@@ -40,7 +42,7 @@ const Home = () => {
         : <span>No tag</span>
       }
       
-      <h2>{text.message}</h2>
+      <h2>{text}</h2>
     </div>
   )
 }
