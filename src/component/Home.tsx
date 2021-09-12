@@ -20,8 +20,7 @@ const Home = () => {
   
   // 【useContext】データの受け渡し（非バケツリレー）
   // const textX = useContext<TextType>(TextContext);
-  const {text, changeText}: TextType = TextSender(); // 隠蔽後
-  changeText('excellent !');
+  const [textData, setTextData] = TextSender(); // 隠蔽後
   
   // 【JSX基本】返せるブロックは1ブロックのみ。無駄なタグ生成を避けるなら<></>で囲う
   return (
@@ -42,7 +41,8 @@ const Home = () => {
         : <span>No tag</span>
       }
       
-      <h2>{text}</h2>
+      <h2>{textData.text}</h2>
+      <button onClick={()=>setTextData({text: 'excellent!!!!'})}>change</button>
     </div>
   )
 }
