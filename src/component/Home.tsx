@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {TextContext, TextType} from "./TotalProvider";
 
 // 【useState】stateの型情報を作る
 type Message = {
@@ -15,8 +16,11 @@ const Home = () => {
 
   // 【useState】オブジェクトの更新は分割代入で行う（＝全体をコピーして上書きをマージする）
   const updateTitle = (newTitle: string): void => setMessage({...message, title: newTitle});
-
-
+  
+  // 【useContext】データの受け渡し（非バケツリレー）
+  const text = useContext<TextType>(TextContext);
+  text.changeText('great!');
+  
   // 【JSX基本】返せるブロックは1ブロックのみ。無駄なタグ生成を避けるなら<></>で囲う
   return (
     <div>
@@ -35,6 +39,8 @@ const Home = () => {
         ? message.tag.map((value, index) => <span key={index}>{value}</span>)
         : <span>No tag</span>
       }
+      
+      <h2>{text.message}</h2>
     </div>
   )
 }

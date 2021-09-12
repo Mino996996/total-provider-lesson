@@ -1,4 +1,12 @@
 import React from "react";
 
+export type TextType = {
+  message: string;
+  changeText: (text:string) => void
+}
 
-export const TestContext = React.createContext({message: 'good job!!'});
+const defaultVal: TextType= {
+  message: '',
+  changeText: (text) =>{ defaultVal.message = text }
+}
+export const TextContext = React.createContext<TextType>(defaultVal);
