@@ -16,15 +16,23 @@ const defaultVal: TextType= {
 export const TextContext = React.createContext<
   [TextType, React.Dispatch<React.SetStateAction<TextType>>]
   >([defaultVal, ()=>{}]);
-
 export const TextProvider = TextContext.Provider;
 
+export const TitleContext = React.createContext<
+  [string, React.Dispatch<React.SetStateAction<string>>]
+  >(['', ()=>{}]);
+export const TitleProvider = TitleContext.Provider;
+
 export const TotalProvider = ({children}: PropsType) =>{
+  
   const [textData, setTextData] = useState<TextType>({text:'test comment'})
+  const [title, setTitle] = useState<string>('No title')
   
   return (
     <TextProvider value={[textData, setTextData]}>
-      {children}
+      <TitleProvider value={[title, setTitle]}>
+        {children}
+      </TitleProvider>
     </TextProvider>
   )
 }

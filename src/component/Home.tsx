@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {TextContext, TextType} from "./TotalProvider";
+import {TextContext, TextType, TitleContext} from "./TotalProvider";
 import {TextSender} from "./textContextSender";
 
 // 【useState】stateの型情報を作る
@@ -22,6 +22,8 @@ const Home = () => {
   // const textX = useContext<TextType>(TextContext);
   const [textData, setTextData] = TextSender(); // 隠蔽後
   
+  const [title, setTitle] = useContext(TitleContext)
+  
   // 【JSX基本】返せるブロックは1ブロックのみ。無駄なタグ生成を避けるなら<></>で囲う
   return (
     <div>
@@ -41,8 +43,12 @@ const Home = () => {
         : <span>No tag</span>
       }
       
+      <h1>{title}</h1>
+      <button onClick={()=>setTitle('new title')}>update title</button>
+      
       <h2>{textData.text}</h2>
       <button onClick={()=>setTextData({text: 'excellent!!!!'})}>change</button>
+      
     </div>
   )
 }
